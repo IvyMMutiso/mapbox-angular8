@@ -1,11 +1,37 @@
 import { Injectable } from '@angular/core';
-
 import * as mapboxgl from 'mapbox-gl';
-
+import { IGeoJson } from '../models/map';
+import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class MapService {
-
-  // constructor(private db: AngularFireDatabase) { }
+export class MapboxService {
+  constructor() {
+    mapboxgl.accessToken = environment.mapbox.accessToken;
+  }
+  getMarkers() {
+    const geoJson: IGeoJson[] = [
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [80.20929129999999, 13.0569951],
+        },
+        properties: {
+          message: 'Chennai',
+        },
+      },
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [77.350048, 12.953847],
+        },
+        properties: {
+          message: 'bangulare',
+        },
+      },
+    ];
+    return geoJson;
+  }
 }
